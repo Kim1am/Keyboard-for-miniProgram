@@ -1,0 +1,51 @@
+<block>
+  <view class='car-keybord fle fle_center'>
+    <view class='modal-mark'></view>
+    <view class='pate-card'>
+      <view class='title'>
+        <span>{{titleText}}</span>
+      </view>
+      <view class='p_40'>
+        <view class='pate-input-view'>
+          <block wx:for="{{inputValue}}" wx:for-index="index" wx:key="index">
+            <view class="fle_1 fle_center input-box {{keybordIndex==index ? 'focus_input' : ''}}" catchtap="clickInputBox"
+                  data-index="{{index}}">
+              {{item}}
+            </view>
+          </block>
+        </view>
+        <view class='fle'>
+          <view class='fle_1'>
+            <button class='newButton' catchtap="submitValue">提交</button>
+          </view>
+          <view class='fle_1'>
+            <button class='newButton btn-red' catchtap="cancelKeyBoard">取消</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='keybord' wx:if="{{keyBoardShow}}">
+      <view class="fle" wx:for="{{currentType === 'English' ? English : Numbers}}" wx:for-item="arrayItem" wx:for-index="Arrayindex" wx:key="Arrayindex">
+        <block wx:if="{{Arrayindex === (currentType === 'English' ? English.length-1 : Numbers.length-1)}}">
+          <view class='fle_1 mar_4' wx:for="{{arrayItem}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+            <view class='box' catchtap='clickKeybord' data-key="{{item}}">
+              <span class="fs_40">{{item}}</span>
+            </view>
+          </view>
+          <view class="{{currentType === 'English' ? 'fle_1_6' : 'fle_0_5'}}">
+            <view class='box2' catchtap="deleteKey">
+              <span class="fs_40 " style="font-weight:bold">删除</span>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="fle_1 mar_4" wx:for="{{arrayItem}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+            <view class='box' catchtap='clickKeybord' data-key="{{item}}">
+              <span class="fs_40">{{item}}</span>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</block>

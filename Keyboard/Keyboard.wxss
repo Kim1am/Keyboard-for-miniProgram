@@ -1,0 +1,146 @@
+.modal-mark {
+  background-color: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.fle_center {
+  align-items: center;
+  justify-content: center;
+}
+
+.fle {
+  display: flex;
+}
+
+.fle_1 {
+  display: flex;
+  flex: 1;
+}
+
+.mar_4 {
+  margin: 4rpx;
+}
+
+.fle_1_6 {
+  display: flex;
+  flex: 1.6;
+}
+
+.fs_40 {
+  font-size: 40rpx;
+}
+
+.newButton {
+  background-color: #03a9f4;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.btn-red {
+  background-color: #ff5722 !important;
+}
+
+.car-keybord {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.keybord {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background: #d0d5d9;
+}
+
+.keybord .box {
+  width: 100%;
+  padding: 10rpx;
+  border-radius: 8rpx;
+  background: #fff;
+  text-align: center;
+}
+
+.keybord .box2 {
+  width: 100%;
+  margin: 4rpx;
+  padding: 10rpx;
+  border-radius: 8rpx;
+  background: #acb3bb;
+  text-align: center;
+}
+
+.pate-card {
+  width: 90%;
+  z-index: 1000;
+  background: #fff;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 160rpx;
+}
+
+.pate-card .title {
+  padding: 40rpx 0;
+  text-align: center;
+  background: #03a9f4;
+  color: #fff;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.pate-input-view {
+  margin-bottom: 60rpx;
+  display: flex;
+}
+
+.pate-card .input-box {
+  border: 1px solid gray;
+  height: 60rpx;
+  margin: 0 10rpx;
+  text-align: center;
+}
+
+/* 自定义 */
+.pate-card .title {
+  background: #147efb;
+}
+/* 自定义 */
+.newButton {
+  background: #147efb;
+}
+
+.pate-card .input-box {
+  margin: 0 5rpx 0 0;
+}
+
+.p_40 {
+  padding: 40rpx 30rpx;
+}
+
+.en_last_row {
+  padding: 0 20rpx;
+}
+
+.keybord {
+  padding-bottom: 30rpx;
+}
+
+.fle_0_5 {
+  flex: 0.5;
+}
+
+.focus_input {
+  border: 1px solid#dddddd !important;
+  box-shadow: 0px 0px 8px-3px#147EFB inset;
+}
