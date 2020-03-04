@@ -4,7 +4,7 @@
 >可以自己再二次开发切换成车牌键盘（本人实践过），或者3种输入类型键盘模式
 
 demo图：
-  ![demo1.png](https://www.z4a.net/images/2020/03/04/demo1.png)
+<img src="https://www.z4a.net/images/2020/03/04/demo1.png" alt="demo1.png" border="0" />
 
 使用方法:
 1. 直接clone整个rep到自己项目里面
@@ -21,10 +21,10 @@ demo图：
     bind:hideKeyBoard="hideKeyBoard">
   </Keyboard>
   <!-- 
-    title-text-----对应标题
-    c-value---对应父组件对应的value
-    value-length---对应格子长度
-    change-index----输入到第几位时键盘进行类型切换
-    bind:xxxxx-----子组件触发父组件事件
+    title-text:对应标题
+    c-value:对应父组件对应的value
+    value-length:对应格子长度
+    change-index:输入到第几位时键盘进行类型切换
+    bind:xxxxx:子组件触发父组件事件
    -->
 ```
