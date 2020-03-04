@@ -4,7 +4,7 @@
 >可以自己再二次开发切换成车牌键盘（本人实践过），或者3种输入类型键盘模式
 
 demo图：
-![demo1.png](https://github.com/Kim1am/Keyboard-for-miniProgram/tree/master/Keyboard/demo1.png)
+![demo1.png](https://github.com/Kim1am/Keyboard-for-miniProgram/blob/master/Keyboard/demo1.png)
 
 使用方法:
 1. 直接clone整个rep到自己项目里面
