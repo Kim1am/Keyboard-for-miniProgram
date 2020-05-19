@@ -3,41 +3,62 @@ Component({
     titleText: { type: String, value: '' },
     cValue: { type: String, value: '' },
     changeIndex: { type: Number, value: 0 },
-    valueLength: { type: Number, value: 0 }
+    valueLength: { type: Number, value: 0 },
+    showType: { type: Array, value: ['tractor', 'NumEn'] },
   },
 
   data: {
     keyBoardShow: true,
-    English: [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
-    ],
-    inputValue: ['', '', '', '', '', '', '', '', '', '', ''],
+    inputValue: [''],
     keybordIndex: 0,
-    Numbers: [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9'], ['0']],
-    currentType: 'English'
+    keyBoardObject: {
+      English: [
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      ],
+      Numbers: [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9'], ['0']],
+      NumEn: [
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+        ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+      ],
+      tractor: [
+        ['京', '津', '渝', '沪', '冀', '晋', '辽', '吉', '黑', '苏'],
+        ['浙', '皖', '闽', '赣', '鲁', '豫', '鄂', '湘', '粤', '琼'],
+        ['川', '贵', '云', '陕', '甘', '青', '蒙', '桂', '宁', '新'],
+        ['藏', '使', '领', '警', '学', '港', '澳'],
+      ],
+    },
+    currentType: 'tractor',
   },
   lifetimes: {
-    attached: function() {
-      let self = this
-      if (typeof self.data.valueLength === 'number') {
-        self.setData({
-          inputValue: Array.from(Array(self.data.valueLength), (v, i) => {
-            if (self.data.cValue == '') {
-              return ''
+    attached: function () {
+      let _this = this
+      const {
+        data: { cValue, valueLength, showType },
+      } = _this
+      if (typeof valueLength === 'number') {
+        const inputValue = Array.from(Array(valueLength), (v, i) => {
+          if (cValue == '') {
+            return ''
+          } else {
+            let str = cValue.substring(0, valueLength)
+            if (str.hasOwnProperty(i)) {
+              return str[i]
             } else {
-              let str = self.data.cValue.substring(0, self.data.valueLength)
-              if (str.hasOwnProperty(i)) {
-                return str[i]
-              } else {
-                return ''
-              }
+              return ''
             }
-          })
+          }
+        })
+        const [currentType] = showType
+        _this.setData({
+          inputValue,
+          currentType,
         })
       }
-    }
+    },
   },
   /**
    * 组件的方法列表
@@ -45,51 +66,58 @@ Component({
   methods: {
     //输入框框点击事件
     clickInputBox(e) {
-      let _this = this
-      let index = e.currentTarget.dataset.index
-      let keyBordType = 'English'
-      if (index <= 3) {
-        keyBordType = 'English'
-      } else {
-        keyBordType = 'Numbers'
-      }
+      const _this = this
+      const {
+        currentTarget: {
+          dataset: { index },
+        },
+      } = e
       _this.setData({
         keybordIndex: index,
-        currentType: keyBordType
       })
+      _this.changeType()
       if (!_this.data.keyBoardShow) {
         _this.setData({
-          keyBoardShow: true
+          keyBoardShow: true,
         })
       }
     },
     //键盘按钮事件
     clickKeybord(e) {
-      let _this = this
-      let key = e.currentTarget.dataset.key
-      let index = _this.data.keybordIndex
-      _this.data.inputValue[index] = key
-      if (index == _this.data.changeIndex) {
-        _this.changeType()
-      }
+      const _this = this
+      const {
+        currentTarget: {
+          dataset: { key },
+        },
+      } = e
+      const {
+        data: { keybordIndex: index },
+      } = _this
+      let {
+        data: { inputValue },
+      } = _this
+      inputValue[index] = key
       _this.setData({
-        inputValue: _this.data.inputValue
+        inputValue,
       })
-      if (index + 1 == _this.data.inputValue.length) {
+      if (index + 1 == inputValue.length) {
         _this.setData({
-          keyBoardShow: false
+          keyBoardShow: false,
         })
         return
       } else {
         _this.setData({
-          keybordIndex: index + 1
+          keybordIndex: index + 1,
         })
       }
+      _this.changeType()
     },
 
     deleteKey() {
       let _this = this
-      let index = _this.data.keybordIndex
+      let {
+        data: { keybordIndex: index },
+      } = _this
       if (index == 0) {
         return
       }
@@ -99,38 +127,42 @@ Component({
         _this.data.inputValue[index - 1] = ''
         index = index - 1
       }
-      if (index === _this.data.changeIndex) {
-        _this.changeType()
-      }
       _this.setData({
         keybordIndex: index,
-        inputValue: _this.data.inputValue
+        inputValue: _this.data.inputValue,
       })
+      _this.changeType()
     },
     //更改输入模式
     changeType() {
-      let _this = this
-      let keyBordType = 'English'
-      if (_this.data.currentType == 'English') {
-        keyBordType = 'Numbers'
+      const _this = this
+      const {
+        data: { currentType, showType, changeIndex, keybordIndex: index },
+      } = _this
+      const [firstType, secondType] = showType
+      let keyBordType = firstType
+      if (index < changeIndex) {
+        keyBordType = firstType
       } else {
-        keyBordType = 'English'
+        keyBordType = secondType
       }
-      _this.setData({
-        currentType: keyBordType
-      })
+      if (currentType !== keyBordType) {
+        _this.setData({
+          currentType: keyBordType,
+        })
+      }
     },
     submitValue() {
       let _this = this
       let myEventDetail = { inputValue: _this.data.inputValue.join('') }
       let myEventOption = {} // 触发事件的选项
-      _this.triggerEvent('changeContainerNo', myEventDetail, myEventOption)
+      _this.triggerEvent('confirmEvent', myEventDetail, myEventOption)
     },
     cancelKeyBoard() {
       let _this = this
       let myEventDetail = {}
       let myEventOption = {}
       _this.triggerEvent('hideKeyBoard', myEventDetail, myEventOption)
-    }
-  }
+    },
+  },
 })
